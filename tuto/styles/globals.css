@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+#div{
+ @apply bg-green-400 w-64 h-80 
+ ml-32
+ mt-32
+
+
+}
+
+#respuesta{ @apply float-right mr-10 mt-0 }
+
+
+input{
+  @apply mt-7 mb-7 w-52 ml-5 rounded-lg
+}
+
+h1{
+  @apply
+  absolute
+}
