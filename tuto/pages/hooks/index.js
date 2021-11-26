@@ -8,23 +8,27 @@ import React, { useEffect, useState } from 'react';
 
 export default function useEffectPage() {
 
-    const [resourceType, setResourceType] = useState('0');
-    const [numero, cantidad] = useState('1');
+    const [resourceType, setResourceType] = useState('');
+    const [numero, cantidad] = useState('');
 
     const [items, setItems] = useState([]);
     const [NumeroFocus, setfocus] = useState(0);
     const [img, setimg] = useState("");
+    const [morInfo, setMorInfo] = useState([]);
+
 
     const handleResize = () => {
      
         
         setItems([])
-
+        setResourceType("")
+        cantidad("")
+        setfocus(0)
     }
 
    
     useEffect(() => {
-      // window.addEventListener('blur', handleResize);
+     // window.addEventListener('blur', handleResize);
         
         console.log("d")
         resourceType -= 1;
@@ -32,11 +36,15 @@ export default function useEffectPage() {
 
             .then(response => response.json())
             .then(json => setItems(json))
-
+      console.log(NumeroFocus)
             setimg( `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${NumeroFocus}.png`)
-            console.log(img)
+           let info = items["results"]
+           
+           
     }, [resourceType , numero , NumeroFocus]);
    
+
+
    
     const ComponentUE = dynamic(() => import('../../components/dinamic/useEffectComp'), {
         ssr: false,
@@ -65,9 +73,9 @@ export default function useEffectPage() {
         <div id="div" className= "">
            <form>
                 numero de la pokedex: 
-               <input type="text" onChange={(e) => setResourceType(e.target.value)}></input><br></br>
+               <input type="text"value ={resourceType} onChange={(e) => setResourceType(e.target.value)}></input><br></br>
                Cantidad
-               <input type="text" onChange={(e) => cantidad(e.target.value)}></input><br></br>
+               <input type="text" value ={numero} onChange={(e) => cantidad(e.target.value)}></input><br></br>
                
               
            </form>
@@ -79,10 +87,11 @@ export default function useEffectPage() {
            </div>
            <div id="respuesta">
            {nombrePochimon.map((post) => (
-        <p  > <button onClick={(e) => setfocus(e.target.value)} value={cont}>+</button>{cont++} {post["name"]}</p>
+        <p   onMouseEnter={(e) => setfocus(e.target.id)} id={cont}>{cont++} {post["name"]}</p>
       ))}
       </div>
       </div>
+      
         </>
 
     )
