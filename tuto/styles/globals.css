@@ -15,8 +15,8 @@
 
 }
 
-#respuesta{ @apply float-right mr-10 mt-0 }
-
+#respuesta{ @apply float-right ml-64  mt-32 ml-96 }
+#al{@apply flex}
 
 input{
   @apply mt-7 mb-7 w-52 ml-5 rounded-lg
@@ -25,7 +25,13 @@ input{
 h1{
   @apply
   absolute
+  mt-32
+  
 }
 p{
   @apply rounded-xl bg-red-400 border-green-400 border-2
 }
+
+img{ @apply ml-20}
+
+#all{@apply flex}
