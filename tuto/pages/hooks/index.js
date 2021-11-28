@@ -17,20 +17,20 @@ export default function useEffectPage() {
     const [morInfo, setMorInfo] = useState([]);
 
 
-    const handleResize = () => {
+    //const handleResize = () => {
      
         
-        setItems([])
-        setResourceType("")
-        cantidad("")
-        setfocus(0)
-    }
+       // setItems([])
+       // setResourceType("")
+       //cantidad("")
+        //setfocus(0)
+   // }
 
    
     useEffect(() => {
-     // window.addEventListener('blur', handleResize);
+      //window.addEventListener('blur', handleResize);
         
-        console.log("d")
+        //console.log("d")
         resourceType -= 1;
         fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numero}&offset=${resourceType}`)
 
@@ -40,7 +40,7 @@ export default function useEffectPage() {
             setimg( `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${NumeroFocus}.png`)
            let info = items["results"]
            
-           
+         
     }, [resourceType , numero , NumeroFocus]);
    
 
@@ -55,7 +55,7 @@ export default function useEffectPage() {
     let objeto =  items["results"]
     let nombrePochimon= [];
     let listasmagenes= []
-    console.log(items)
+   // console.log(items)
     for (const i in objeto) {
         nombrePochimon.push(objeto[i]);
         
@@ -90,6 +90,8 @@ export default function useEffectPage() {
         <p   onMouseEnter={(e) => setfocus(e.target.id)} id={cont}>{cont++} {post["name"]}</p>
       ))}
       </div>
+      <ComponentUE />
+      
       </div>
       
         </>
