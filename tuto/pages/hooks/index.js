@@ -4,7 +4,8 @@
 
 import dynamic from 'next/dynamic'
 
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function useEffectPage() {
 
@@ -15,35 +16,42 @@ export default function useEffectPage() {
     const [NumeroFocus, setfocus] = useState(0);
     const [img, setimg] = useState("");
     const [morInfo, setMorInfo] = useState([]);
+    const divdes = useRef();
+    const [info, setinfo] = useState([]);
 
+ 
 
-    //const handleResize = () => {
-     
-        
-       // setItems([])
-       // setResourceType("")
-       //cantidad("")
-        //setfocus(0)
-   // }
-
+  
    
     useEffect(() => {
-      //window.addEventListener('blur', handleResize);
-        
-        //console.log("d")
+     
         resourceType -= 1;
         fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numero}&offset=${resourceType}`)
 
             .then(response => response.json())
             .then(json => setItems(json))
-      console.log(NumeroFocus)
-            setimg( `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${NumeroFocus}.png`)
-           let info = items["results"]
+      console.log(items)
+
+           
            
          
-    }, [resourceType , numero , NumeroFocus]);
+    }, [resourceType , numero]);
    
+    useEffect(() => {
+      if(NumeroFocus >0){
+        
+        fetch(`https://pokeapi.co/api/v2/pokemon/${NumeroFocus}/`)
+          .then(response => response.json())
+          .then(json => setMorInfo(json))
+          setinfo(morInfo["height"])
+        console.log(info)
 
+      }
+        setimg( `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${NumeroFocus}.png`)
+       
+       
+   
+      }, [NumeroFocus])
 
    
     const ComponentUE = dynamic(() => import('../../components/dinamic/useEffectComp'), {
@@ -61,7 +69,10 @@ export default function useEffectPage() {
         
       }
       
-    
+    function aparecer(n){
+      setfocus(n)
+      divdes.current.style.display = "block"
+    }
 
 
 
@@ -81,14 +92,15 @@ export default function useEffectPage() {
            </form>
            <img src={img}></img>
            </div>
-           <div id="img">
-          
-             
-           </div>
+           <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+           <div id="img" ref={divdes}>
+           {info}dm
+          </div>
            <div id="respuesta">
            {nombrePochimon.map((post) => (
-        <p   onMouseEnter={(e) => setfocus(e.target.id)} id={cont}>{cont++} {post["name"]}</p>
+          <p onMouseEnter={(e) => aparecer(e.target.id)} id={cont}>{cont++} {post["name"]}</p>
       ))}
+
       </div>
       <ComponentUE />
       
