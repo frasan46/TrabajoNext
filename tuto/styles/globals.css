@@ -13,6 +13,7 @@
  mt-32
 
 
+
 }
 
 #respuesta{ @apply float-right ml-64  mt-32 ml-96 }
@@ -33,5 +34,7 @@ p{
 }
 
 img{ @apply ml-20}
-
+#img{
+  @apply hidden
+}
 #all{@apply flex}
